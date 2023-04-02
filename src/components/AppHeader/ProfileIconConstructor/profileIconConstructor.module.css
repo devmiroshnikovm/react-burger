@@ -1,0 +1,9 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  margin-left: calc((288 / 1920) * 100%);
+  border: 1px solid red;
+}

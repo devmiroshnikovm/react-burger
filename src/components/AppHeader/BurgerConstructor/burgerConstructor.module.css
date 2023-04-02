@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 33px;
+  margin-bottom: 33px;
+
+  margin-left: calc((320 / 1920) * 100%);
+  border: 1px solid red;
+}
