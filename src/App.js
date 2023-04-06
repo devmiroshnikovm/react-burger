@@ -2,15 +2,18 @@ import AppHeader from "./components/AppHeader/AppHeader";
 import BurgerIngredients from "./components/BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "./components/BurgerConstructor/BurgerConstructor";
 import stylesApp from "./stylesApp.module.css";
+import { useEffect } from "react";
 
 function App() {
+  //const [state, setState] = useEffect([]);
+
   return (
     <div className="App">
       <AppHeader />
-      {/*  <div className={stylesApp.box}>
-         <BurgerIngredients {...response} />
+      <div className={stylesApp.box}>
+        <BurgerIngredients {...response} />
         <BurgerConstructor {...response} />
-      </div> */}
+      </div>
     </div>
   );
 }

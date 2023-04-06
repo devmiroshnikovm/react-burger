@@ -1,14 +1,6 @@
 .box {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-}
-
-.ml_76px {
-  margin-left: 76px;
-}
-
-.mr_76px {
-  margin-right: 76px;
 }

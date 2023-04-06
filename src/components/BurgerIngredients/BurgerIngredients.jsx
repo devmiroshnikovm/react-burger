@@ -7,7 +7,7 @@ function BurgerIngredients(props) {
 
   return (
     <div className={styles.box}>
-      <p>Соберите бургер</p>
+      <p className="text text_type_main-large pt-10 pb-5">Соберите бургер</p>
       <MenuItems {...otherProps} />
       <ProductContainer {...otherProps} />
     </div>

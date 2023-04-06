@@ -5,8 +5,8 @@ function ElementItem(props) {
   const { data, ...otherProps } = props;
 
   return (
-    <div className={styles.scrollContainer}>
-      <h2>Булки</h2>
+    <div className="custom-scroll это не работает">
+      <p className="text text_type_main-medium">Булки</p>
       <ul className={styles.container}>
         {props.data.map((element) => {
           if (element.type === "bun") {
@@ -34,7 +34,7 @@ function ElementItem(props) {
         })}
       </ul>
 
-      <h2>Соусы</h2>
+      <p className="text text_type_main-medium">Соусы</p>
       <ul className={styles.container}>
         {props.data.map((element) => {
           if (element.type === "sauce") {
@@ -62,7 +62,7 @@ function ElementItem(props) {
         })}
       </ul>
 
-      <h2>Начинки</h2>
+      <p className="text text_type_main-medium">Начинки</p>
       <ul className={styles.container}>
         {props.data.map((element) => {
           if (element.type === "main") {
