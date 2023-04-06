@@ -5,7 +5,7 @@ function ElementItem(props) {
   const { data, ...otherProps } = props;
 
   return (
-    <div className="custom-scroll это не работает">
+    <div className={`${styles.scrollContainer} custom-scroll`}>
       <p className="text text_type_main-medium">Булки</p>
       <ul className={styles.container}>
         {props.data.map((element) => {
@@ -33,7 +33,6 @@ function ElementItem(props) {
           }
         })}
       </ul>
-
       <p className="text text_type_main-medium">Соусы</p>
       <ul className={styles.container}>
         {props.data.map((element) => {
@@ -61,7 +60,6 @@ function ElementItem(props) {
           }
         })}
       </ul>
-
       <p className="text text_type_main-medium">Начинки</p>
       <ul className={styles.container}>
         {props.data.map((element) => {
