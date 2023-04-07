@@ -3,9 +3,7 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function BurgerConstructor(props) {
-  const { success, ...otherProps } = props;
-  const elements = otherProps.data;
-  console.log(elements);
+  const { elements } = props;
 
   return (
     <ul className={styles.box}>

@@ -2,13 +2,13 @@ import styles from "./styles.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function ElementItem(props) {
-  const { data, ...otherProps } = props;
+  const { elements } = props;
 
   return (
     <div className={`${styles.scrollContainer} custom-scroll`}>
       <p className="text text_type_main-medium">Булки</p>
       <ul className={styles.container}>
-        {props.data.map((element) => {
+        {elements.map((element) => {
           if (element.type === "bun") {
             return (
               <li className={styles.element} key={element._id}>
@@ -35,7 +35,7 @@ function ElementItem(props) {
       </ul>
       <p className="text text_type_main-medium">Соусы</p>
       <ul className={styles.container}>
-        {props.data.map((element) => {
+        {elements.map((element) => {
           if (element.type === "sauce") {
             return (
               <li className={styles.element} key={element._id}>
@@ -62,7 +62,7 @@ function ElementItem(props) {
       </ul>
       <p className="text text_type_main-medium">Начинки</p>
       <ul className={styles.container}>
-        {props.data.map((element) => {
+        {elements.map((element) => {
           if (element.type === "main") {
             return (
               <li className={styles.element} key={element._id}>

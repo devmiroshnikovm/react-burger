@@ -2,24 +2,81 @@ import AppHeader from "./components/AppHeader/AppHeader";
 import BurgerIngredients from "./components/BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "./components/BurgerConstructor/BurgerConstructor";
 import stylesApp from "./stylesApp.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import imageDone from "./images/done.svg";
-
 import Modal from "./components/Modal/Modal";
+import ErrorMock from "./components/ErrorMock/ErrorMock";
+import Loading from "./components/Loading/Loading";
 
 function App() {
-  //const [state, setState] = useEffect([]);
+  const [error, setError] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // Код эффекта
+
+    console.log("start fetch");
+
+    const config = {
+      baseUrl: "https://norma.nomoreparties.space/api/ingredients",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    async function checkResponse(result) {
+      if (result.ok) {
+        return await result.json();
+      } else {
+        throw new Error(`Ошибка: ${result.status}`);
+      }
+    }
+
+    async function getRequest() {
+      const result = await fetch(config.baseUrl, {
+        method: "GET",
+        headers: config.headers,
+      });
+      return await checkResponse(result);
+    }
+
+    const getState = async () => {
+      try {
+        const result = await getRequest();
+
+        setTimeout(() => {
+          setData(result.data);
+          setLoading(false);
+        }, 2000);
+      } catch (err) {
+        setError(err);
+      }
+    };
+
+    getState();
+
+    // Код сброса
+    return () => {
+      // отписка от событий, закрытие соединений
+    };
+  }, []);
 
   return (
     <>
-      {/*  <AppHeader />
-      <main className={stylesApp.box}>
-        <BurgerIngredients {...response} />
-        <BurgerConstructor {...response} />
-      </main> */}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <AppHeader />
+          <main className={stylesApp.box}>
+            <BurgerIngredients elements={data} />
+            <BurgerConstructor elements={data} />
+          </main>
+        </>
+      )}
 
-      <Modal>
+      {/*       <Modal>
         <div className={stylesApp.modalContaner}>
           <p className="text text_type_digits-large pt-30">034536</p>
           <p className="text text text_type_main-default mb-8">
@@ -34,7 +91,7 @@ function App() {
             Дождитесь готовности на орбитальной станции
           </p>
         </div>
-      </Modal>
+      </Modal> */}
     </>
   );
 }
