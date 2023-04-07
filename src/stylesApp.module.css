@@ -8,3 +8,11 @@
   justify-content: space-between;
   align-items: start;
 }
+
+.modalContaner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  outline: 1px solid yellowgreen;
+}

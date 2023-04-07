@@ -4,17 +4,38 @@ import BurgerConstructor from "./components/BurgerConstructor/BurgerConstructor"
 import stylesApp from "./stylesApp.module.css";
 import { useEffect } from "react";
 
+import imageDone from "./images/done.svg";
+
+import Modal from "./components/Modal/Modal";
+
 function App() {
   //const [state, setState] = useEffect([]);
 
   return (
-    <div className="App">
-      <AppHeader />
-      <div className={stylesApp.box}>
+    <>
+      {/*  <AppHeader />
+      <main className={stylesApp.box}>
         <BurgerIngredients {...response} />
         <BurgerConstructor {...response} />
-      </div>
-    </div>
+      </main> */}
+
+      <Modal>
+        <div className={stylesApp.modalContaner}>
+          <p className="text text_type_digits-large pt-30">034536</p>
+          <p className="text text text_type_main-default mb-8">
+            идентификатор заказа
+          </p>
+          <img src={imageDone} />
+          <p className="text text text_type_main-default mt-15">
+            Ваш заказ начали готовить
+          </p>
+
+          <p className="text text text_type_main-default mt-2 pb-30">
+            Дождитесь готовности на орбитальной станции
+          </p>
+        </div>
+      </Modal>
+    </>
   );
 }
 
