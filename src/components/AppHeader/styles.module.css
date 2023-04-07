@@ -8,7 +8,6 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  outline: 1px solid red;
 }
 .burgerMenuWrapper {
   display: flex;
@@ -22,7 +21,6 @@
   justify-content: row;
   align-items: center;
   justify-content: center;
-  outline: 1px solid red;
 }
 
 .menuLabelWrapper {
@@ -30,7 +28,6 @@
   justify-content: row;
   align-items: center;
   justify-content: center;
-  outline: 1px solid red;
 }
 
 .loginLabelWrapper {
@@ -38,5 +35,4 @@
   justify-content: row;
   align-items: center;
   justify-content: center;
-  outline: 1px solid red;
 }
