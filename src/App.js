@@ -9,6 +9,8 @@ import Modal from "./components/Modal/Modal";
 import ErrorMock from "./components/ErrorMock/ErrorMock";
 import Loading from "./components/Loading/Loading";
 
+import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+
 function App() {
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(true);
@@ -44,6 +46,7 @@ function App() {
     const getState = async () => {
       try {
         const result = await getRequest();
+        console.log(result);
 
         setTimeout(() => {
           setData(result.data);
@@ -62,9 +65,11 @@ function App() {
     };
   }, []);
 
+  const element = data[0];
+
   return (
     <>
-      {isLoading ? (
+      {/*    {isLoading ? (
         <Loading />
       ) : (
         <>
@@ -76,8 +81,7 @@ function App() {
             </main>
           </div>
         </>
-      )}
-
+      )} */}
       {/*       <Modal>
         <div className={stylesApp.modalContaner}>
           <p className="text text_type_digits-large pt-30">034536</p>
@@ -94,6 +98,44 @@ function App() {
           </p>
         </div>
       </Modal> */}
+
+      <Modal header={"Детали ингредиента"}>
+        <div className={stylesApp.modalContaner}>
+          <img src={element.image_large} alt={element.name} className=""></img>
+          <p className="text text text_type_main-default mb-4">
+            {element.name}
+          </p>
+          <div
+            className={stylesApp.modalIngredientsDetailsWrapper + " mt-8 mb-15"}
+          >
+            <div className={stylesApp.mIProductDesriptionWrapper + " mr-5"}>
+              <p className="text text text_type_main-default">Калории,ккал</p>
+              <p className="text text text_type_main-default">
+                {element.calories}
+              </p>
+            </div>
+
+            <div className={stylesApp.mIProductDesriptionWrapper + " mr-5"}>
+              <p className="text text text_type_main-default">Белки, г</p>
+              <p className="text text text_type_main-default">
+                {element.proteins}
+              </p>
+            </div>
+
+            <div className={stylesApp.mIProductDesriptionWrapper + " mr-5"}>
+              <p className="text text text_type_main-default">Жиры, г</p>
+              <p className="text text text_type_main-default">{element.fat}</p>
+            </div>
+
+            <div className={stylesApp.mIProductDesriptionWrapper}>
+              <p className="text text text_type_main-default">Углеводы, г</p>
+              <p className="text text text_type_main-default">
+                {element.carbohydrates}
+              </p>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 }

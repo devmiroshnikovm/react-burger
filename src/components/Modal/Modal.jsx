@@ -33,7 +33,7 @@ function Modal(props) {
         <>
           <div className={styles.popupContainer}>
             <div className={styles.headerCloseWrapper}>
-              <p>header</p>
+              <p className="text text_type_main-large">{header}</p>
               <CloseIcon />
             </div>
             <div>{props.children}</div>
