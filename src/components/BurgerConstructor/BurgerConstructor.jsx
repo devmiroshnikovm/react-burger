@@ -9,25 +9,27 @@ function BurgerConstructor(props) {
 
   return (
     <div className={styles.box + " pt-25"}>
-      <ul className={styles.list}>
-        {elements.map((element) => {
-          return (
-            <li
-              className={`${styles.dragIconConstructorElementWrapper} mb-4`}
-              key={element._id}
-            >
-              <DragIcon />
+      <div className={`${styles.scrollContainer} custom-scroll`}>
+        <ul className={styles.list}>
+          {elements.map((element) => {
+            return (
+              <li
+                className={`${styles.dragIconConstructorElementWrapper} mb-4`}
+                key={element._id}
+              >
+                <DragIcon />
 
-              <ConstructorElement
-                isLocked={true}
-                text={element.name}
-                price={element.price}
-                thumbnail={element.image}
-              />
-            </li>
-          );
-        })}
-      </ul>
+                <ConstructorElement
+                  isLocked={true}
+                  text={element.name}
+                  price={element.price}
+                  thumbnail={element.image}
+                />
+              </li>
+            );
+          })}
+        </ul>
+      </div>
       <div className={styles.bottomElementsWrapper + " mt-10"}>
         <p className="text text_type_digits-medium">610</p>
         <span className="ml-2 mr-10">

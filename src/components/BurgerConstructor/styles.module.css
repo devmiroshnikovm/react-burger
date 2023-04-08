@@ -19,3 +19,8 @@
   justify-content: end;
   align-items: center;
 }
+
+.scrollContainer {
+  overflow-y: scroll;
+  height: 560px;
+}
