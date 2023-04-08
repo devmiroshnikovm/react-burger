@@ -14,19 +14,27 @@ const plug = {
 };
 
 function Modal(props) {
-  const { header, onClose } = props;
-
+  const { header, handleCloseModal, isOpen } = props;
   const [domReady, setDomReady] = useState(false);
+
+  function handleCloseButtonClick(e) {
+    if (handleCloseModal) {
+      handleCloseModal();
+    }
+  }
 
   useEffect(() => {
     // Код эффекта
     setDomReady(true);
     console.log("Mounted");
+
     // Код сброса
     return () => {
       // отписка от событий, закрытие соединений
     };
   }, []);
+
+  if (!isOpen) return null;
 
   return domReady
     ? createPortal(
@@ -34,7 +42,7 @@ function Modal(props) {
           <div className={styles.popupContainer}>
             <div className={styles.headerCloseWrapper}>
               <p className="text text_type_main-large">{header}</p>
-              <CloseIcon />
+              <CloseIcon onClick={handleCloseButtonClick} />
             </div>
             <div>{props.children}</div>
           </div>

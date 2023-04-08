@@ -5,7 +5,13 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function BurgerConstructor(props) {
-  const { elements } = props;
+  const { elements, handleOpenModalOrderDetails } = props;
+
+  function openModalOrderDetails(e) {
+    if (handleOpenModalOrderDetails) {
+      handleOpenModalOrderDetails();
+    }
+  }
 
   return (
     <div className={styles.box + " pt-25"}>
@@ -35,7 +41,12 @@ function BurgerConstructor(props) {
         <span className="ml-2 mr-10">
           <CurrencyIcon type="primary" />
         </span>
-        <Button htmlType="button" type="primary" size="medium">
+        <Button
+          htmlType="button"
+          type="primary"
+          size="medium"
+          onClick={openModalOrderDetails}
+        >
           Оформить заказ
         </Button>
       </div>

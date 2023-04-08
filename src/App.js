@@ -16,6 +16,20 @@ function App() {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
+  // test
+  const [isOpen, setIsPopupOpen] = useState(false);
+
+  function handleOpenModalOrderDetails() {
+    console.log("setIsPopupOpen");
+    setIsPopupOpen(true);
+  }
+
+  function handleCloseModal() {
+    setIsPopupOpen(false);
+  }
+
+  //test
+
   useEffect(() => {
     // Код эффекта
 
@@ -69,20 +83,67 @@ function App() {
 
   return (
     <>
-      {/*    {isLoading ? (
+      {isLoading ? (
         <Loading />
       ) : (
         <>
+          {/* отрисовываем главуню страницу */}
           <div className={stylesApp.topBox}>
             <AppHeader />
             <main className={stylesApp.box}>
               <BurgerIngredients elements={data} />
-              <BurgerConstructor elements={data} />
+              <BurgerConstructor
+                elements={data}
+                handleOpenModalOrderDetails={handleOpenModalOrderDetails}
+              />
             </main>
           </div>
+
+          {/* отрисовываем модальное окно детали заказа */}
+
+          <Modal
+            header={"test"}
+            handleCloseModal={handleCloseModal}
+            isOpen={isOpen}
+          >
+            <div className={stylesApp.modalContaner}>
+              <p className="text text_type_digits-large pt-30">034536</p>
+              <p className="text text text_type_main-default mb-8">
+                идентификатор заказа
+              </p>
+              <img src={imageDone} />
+              <p className="text text text_type_main-default mt-15">
+                Ваш заказ начали готовить
+              </p>
+
+              <p className="text text text_type_main-default mt-2 pb-30">
+                Дождитесь готовности на орбитальной станции
+              </p>
+            </div>
+          </Modal>
         </>
+      )}
+      {/* 
+      {isModalOpen && (
+        <Modal header={"test"} handleCloseModal={handleCloseModal}>
+          <div className={stylesApp.modalContaner}>
+            <p className="text text_type_digits-large pt-30">034536</p>
+            <p className="text text text_type_main-default mb-8">
+              идентификатор заказа
+            </p>
+            <img src={imageDone} />
+            <p className="text text text_type_main-default mt-15">
+              Ваш заказ начали готовить
+            </p>
+
+            <p className="text text text_type_main-default mt-2 pb-30">
+              Дождитесь готовности на орбитальной станции
+            </p>
+          </div>
+        </Modal>
       )} */}
-      {/*       <Modal>
+
+      {/*       <Modal header={"test"}>
         <div className={stylesApp.modalContaner}>
           <p className="text text_type_digits-large pt-30">034536</p>
           <p className="text text text_type_main-default mb-8">
@@ -99,7 +160,7 @@ function App() {
         </div>
       </Modal> */}
 
-      <Modal header={"Детали ингредиента"}>
+      {/* <Modal header={"Детали ингредиента"}>
         <div className={stylesApp.modalContaner}>
           <img src={element.image_large} alt={element.name} className=""></img>
           <p className="text text text_type_main-default mb-4">
@@ -135,7 +196,7 @@ function App() {
             </div>
           </div>
         </div>
-      </Modal>
+      </Modal> */}
     </>
   );
 }
