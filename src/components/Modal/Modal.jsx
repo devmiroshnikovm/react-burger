@@ -7,6 +7,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
+import PropTypes from "prop-types";
+
 const modalRoot = document.getElementById("react-modals");
 
 function Modal(props) {
@@ -86,3 +88,12 @@ function Modal(props) {
 }
 
 export default Modal;
+
+Modal.propTypes = {
+  children: PropTypes.element.isRequired,
+  header: PropTypes.string,
+  handleCloseModal: PropTypes.func,
+  isOpen: PropTypes.bool,
+  resetCurrentIngredient: PropTypes.func,
+  resetIsOrderDetailsOpen: PropTypes.func,
+};

@@ -1,5 +1,6 @@
 import styles from "./styles.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
 
 function BurgerIngredient(props) {
   const { ingredient, handleOnSelect } = props;
@@ -30,3 +31,8 @@ function BurgerIngredient(props) {
 }
 
 export default BurgerIngredient;
+
+BurgerIngredient.propTypes = {
+  ingredient: PropTypes.object,
+  handleOnSelect: PropTypes.func,
+};

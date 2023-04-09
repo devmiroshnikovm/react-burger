@@ -6,6 +6,7 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 function BurgerConstructor(props) {
   const { elements, handleOpenModal, handleCloseModal, isOpen } = props;
@@ -78,3 +79,10 @@ function BurgerConstructor(props) {
 }
 
 export default BurgerConstructor;
+
+BurgerConstructor.propTypes = {
+  elements: PropTypes.array,
+  handleOpenModal: PropTypes.func,
+  handleCloseModal: PropTypes.func,
+  isOpen: PropTypes.bool,
+};

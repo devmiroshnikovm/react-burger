@@ -1,5 +1,6 @@
 import styles from "./styles.module.css";
 import BurgerIngredient from "../BurgerIngredient/BurgerIngredient";
+import PropTypes from "prop-types";
 
 function ProductContainer(props) {
   const { elements, handleOnSelect, isOpen, ...otherProps } = props;
@@ -58,6 +59,12 @@ function ProductContainer(props) {
 }
 
 export default ProductContainer;
+
+ProductContainer.propTypes = {
+  elements: PropTypes.array,
+  handleOnSelect: PropTypes.func,
+  isOpen: PropTypes.bool,
+};
 
 {
   /* <ElementItem elements={elements} /> */

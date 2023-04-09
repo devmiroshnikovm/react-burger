@@ -5,6 +5,7 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import Modal from "../Modal/Modal";
 
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 function BurgerIngredients(props) {
   const { elements, handleOpenModal, handleCloseModal, isOpen, ...otherProps } =
@@ -43,3 +44,10 @@ function BurgerIngredients(props) {
 }
 
 export default BurgerIngredients;
+
+BurgerIngredients.propTypes = {
+  elements: PropTypes.array,
+  handleOpenModal: PropTypes.func,
+  handleCloseModal: PropTypes.func,
+  isOpen: PropTypes.bool,
+};

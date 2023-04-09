@@ -1,4 +1,5 @@
 import styles from "./styles.module.css";
+import PropTypes from "prop-types";
 
 function ModalOverlay(props) {
   const { resetAllStatesAfterClosingModal } = props;
@@ -12,3 +13,7 @@ function ModalOverlay(props) {
 }
 
 export default ModalOverlay;
+
+ModalOverlay.propTypes = {
+  resetAllStatesAfterClosingModal: PropTypes.func,
+};

@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import imageDone from "../../images/done.svg";
 
-function OrderDetails(props) {
+function OrderDetails() {
   return (
     <>
       <div className={styles.modalContaner}>
