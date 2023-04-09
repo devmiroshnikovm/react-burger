@@ -1,106 +1,116 @@
-const MouseSpy = () => {
-  const [mousePosition, setMousePosition] = useState([]);
-
-  useEffect(() => {
-    // Устанавливаем слушатель события при монтировании
-    document.addEventListener("mousemove", trackMousePos);
-
-    // Сбрасываем слушатель события при удалении компонента из DOM
-    return () => {
-      document.removeEventListener("mousemove", trackMousePos);
-    };
-  }, []);
-
-  const trackMousePos = (e) => {
-    setMousePosition([e.clientX, e.clientY]);
-  };
-};
-
-useEffect(() => {
-  // Код эффекта
-
-  // Код сброса
-  return () => {
-    // отписка от событий, закрытие соединений
-  };
-}, []);
-
-
-
-
-
-
-
-import React, { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import styles from './Modal.module.css';
-import ModalOverlay from './ModalOverlay';
-import CloseIcon from './CloseIcon';
-
-const modalRoot = document.getElementById('modal-root');
-
-function Modal(props) {
-  const { header, onClose } = props;
-
-  const [domReady, setDomReady] = useState(false);
-
-  function handleCloseButtonClick(e) {
-    console.log(e.target);
-    if (onClose) {
-      onClose(); // Call the onClose callback when the CloseIcon is clicked
-    }
-  }
-
-  useEffect(() => {
-    setDomReady(true);
-    console.log("Mounted");
-
-    return () => {
-    };
-  }, []);
-
-  return domReady
-    ? createPortal(
-        <>
-          <div className={styles.popupContainer}>
-            <div className={styles.headerCloseWrapper}>
-              <p className="text text_type_main-large">{header}</p>
-              <CloseIcon onClick={handleCloseButtonClick} />
-            </div>
-            <div>{props.children}</div>
-          </div>
-
-          <ModalOverlay />
-        </>,
-        modalRoot
-      )
-    : null;
-}
-
-export default Modal;
-
-
-
-
 import React, { useState } from 'react';
-import Modal from './Modal';
 
-function App() {
-  const [isModalOpen, setIsModalOpen] = useState(true);
-
-  function handleCloseModal() {
-    setIsModalOpen(false);
-  }
+function Popup({ isOpen, onClose }) {
+  if (!isOpen) return null;
 
   return (
-    <div className="App">
-      {isModalOpen && (
-        <Modal header={"test"} onClose={handleCloseModal}>
-          {/* ... */}
-        </Modal>
-      )}
+    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)' }}>
+      <div style={{ background: 'white', padding: 20, maxWidth: 500, margin: '100px auto' }}>
+        <h2>This is a popup</h2>
+        <button onClick={onClose}>Close Popup</button>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const handleOpenPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
+
+  return (
+    <div>
+      <button onClick={handleOpenPopup}>Open Popup</button>
+      <Popup isOpen={isPopupOpen} onClose={handleClosePopup} />
     </div>
   );
 }
 
 export default App;
+
+
+<BurgerIngredient ingredient={ingredient} onSelect={setCurrentIngredient} key={} />
+
+
+
+
+
+function BurgerIngredients(props) {
+  const { elements, ...otherProps } = props;
+
+  const [currentIngredient, setCurrentIngredient] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <>
+      <div className={styles.box}>
+        <p className="text text_type_main-large pt-10 pb-5">Соберите бургер</p>
+        <MenuItems {...otherProps} setCurrentIngredient={setCurrentIngredient} setIsOpen={setIsOpen} />
+        <ProductContainer elements={elements} setCurrentIngredient={setCurrentIngredient} setIsOpen={setIsOpen} />
+      </div>
+      {currentIngredient && (
+        <Modal header={"test"} handleCloseModal={handleCloseModal} isOpen={isOpen}>
+          <IngredientDetails ingredient={currentIngredient} />
+        </Modal>
+      )}
+    </>
+  );
+}
+
+export default BurgerIngredients;
+
+
+
+
+
+function BurgerIngredients(props) {
+  const { elements, handleCloseModal, isOpen, ...otherProps } = props;
+
+  const [currentIngredient, setCurrentIngredient] = useState(null);
+
+  function handleCurrentIngredient() {
+    setCurrentIngredient(ingredient);
+  }
+
+  const firstElement = elements[0];
+
+  return (
+    <>
+      <div className={styles.box}>
+        <p className="text text_type_main-large pt-10 pb-5">Соберите бургер</p>
+        <MenuItems {...otherProps} />
+        <ProductContainer elements={elements} />
+
+        <BurgerIngredient
+          ingredient={firstElement}
+          onSelect={setCurrentIngredient}
+          key={firstElement._id}
+        />
+
+        {/* <BurgerIngredient ingredient={ingredient} onSelect={setCurrentIngredient} key={} /> */}
+      </div>
+
+      {currentIngredient && (
+        <Modal
+          header={"Детали ингредиента"}
+          handleCloseModal={handleCloseModal}
+          isOpen={isOpen}
+        >
+          {/* <IngredientDetails ingredient={currentIngredient} /> */}
+        </Modal>
+      )}
+    </>
+  );
+}
+
+export default BurgerIngredients;

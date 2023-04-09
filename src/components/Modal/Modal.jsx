@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
-import ModalHeader from "../ModalHeader/ModalHeader";
+import ErrorMock from "../ErrorMock/ErrorMock";
 
 import { createPortal } from "react-dom";
 import { useState } from "react";
@@ -9,93 +9,80 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 const modalRoot = document.getElementById("react-modals");
 
-const plug = {
-  title: "test",
-};
-
 function Modal(props) {
-  const { header, handleCloseModal, isOpen } = props;
+  const {
+    header,
+    handleCloseModal,
+    isOpen,
+    resetCurrentIngredient,
+    resetIsOrderDetailsOpen,
+  } = props;
   const [domReady, setDomReady] = useState(false);
 
-  function handleCloseButtonClick(e) {
+  /* закрытие модального окна */
+
+  function handleCloseButtonClick() {
+    resetAllStatesAfterClosingModal();
+  }
+
+  function resetAllStatesAfterClosingModal() {
     if (handleCloseModal) {
       handleCloseModal();
     }
+    if (resetCurrentIngredient) {
+      resetCurrentIngredient();
+    }
+    if (resetIsOrderDetailsOpen) {
+      resetIsOrderDetailsOpen();
+    }
   }
+
+  // по escape
+  function handlePopupByEscape(event) {
+    if (event.code === "Escape") {
+      if (handleCloseModal) {
+        handleCloseModal();
+      }
+    }
+  }
+
+  /* закрытие модального окна */
 
   useEffect(() => {
     // Код эффекта
     setDomReady(true);
     console.log("Mounted");
+    document.addEventListener("keydown", handlePopupByEscape);
 
     // Код сброса
     return () => {
       // отписка от событий, закрытие соединений
+      document.removeEventListener("keydown", handlePopupByEscape);
     };
   }, []);
 
   if (!isOpen) return null;
 
-  return domReady
-    ? createPortal(
-        <>
-          <div className={styles.popupContainer}>
-            <div className={styles.headerCloseWrapper}>
-              <p className="text text_type_main-large">{header}</p>
-              <CloseIcon onClick={handleCloseButtonClick} />
-            </div>
-            <div>{props.children}</div>
+  return domReady ? (
+    createPortal(
+      <>
+        <div className={styles.popupContainer}>
+          <div className={styles.headerCloseWrapper}>
+            <p className="text text_type_main-large">{header}</p>
+            <CloseIcon onClick={handleCloseButtonClick} />
           </div>
+          <div>{props.children}</div>
+        </div>
 
-          <ModalOverlay />
-        </>,
-        modalRoot
-      )
-    : null;
+        <ModalOverlay
+          resetAllStatesAfterClosingModal={resetAllStatesAfterClosingModal}
+        />
+      </>,
+      modalRoot
+    )
+  ) : (
+    <ErrorMock />
+  );
 }
 
 export default Modal;
-
-{
-  /* <div className={`${styles.headerCloseWrapper} pl-10 pt-10 pr-10`}>
-<ModalHeader header={header} />
-<button>close</button>
-</div> 
-
-   <div>{props.children}</div>
-   */
-}
-
-{
-  /* <ModalHeader onClose={onClose} header={header} />
-<button className={styles.close}></button> */
-}
-
-{
-  /* <div className={styles.popupContainer}>
-<ModalHeader onClose={onClose} header={header} />
-<button className={styles.close}></button>
-
-<div className={styles.editContent}>test</div>
-</div> */
-}
-
-{
-  /* <ModalOverlay>
-<div>test</div>
-</ModalOverlay>
-<Backdrop /> */
-}
-
-/* example 
-function LifecycleFunction() {
-  React.useEffect(() => {
-    console.log('Mounted');
-    return () => {
-      console.log('Will unmount');
-    };
-  }, []); // Empty array means to only run once on mount.
-  return (
-    <div>Lifecycle Function</div>
-  );
-} */

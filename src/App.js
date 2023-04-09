@@ -4,23 +4,17 @@ import BurgerConstructor from "./components/BurgerConstructor/BurgerConstructor"
 import stylesApp from "./stylesApp.module.css";
 import { useEffect, useState } from "react";
 
-import imageDone from "./images/done.svg";
-import Modal from "./components/Modal/Modal";
 import ErrorMock from "./components/ErrorMock/ErrorMock";
 import Loading from "./components/Loading/Loading";
-
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function App() {
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  // test
   const [isOpen, setIsPopupOpen] = useState(false);
 
-  function handleOpenModalOrderDetails() {
-    console.log("setIsPopupOpen");
+  function handleOpenModal() {
     setIsPopupOpen(true);
   }
 
@@ -79,51 +73,42 @@ function App() {
     };
   }, []);
 
-  const element = data[0];
-
   return (
     <>
       {isLoading ? (
         <Loading />
       ) : (
         <>
-          {/* отрисовываем главуню страницу */}
+          {/* отрисовываем главную страницу */}
           <div className={stylesApp.topBox}>
             <AppHeader />
             <main className={stylesApp.box}>
-              <BurgerIngredients elements={data} />
+              <BurgerIngredients
+                elements={data}
+                isOpen={isOpen}
+                handleOpenModal={handleOpenModal}
+                handleCloseModal={handleCloseModal}
+              />
               <BurgerConstructor
                 elements={data}
-                handleOpenModalOrderDetails={handleOpenModalOrderDetails}
+                isOpen={isOpen}
+                handleOpenModal={handleOpenModal}
+                handleCloseModal={handleCloseModal}
               />
             </main>
           </div>
-
-          {/* отрисовываем модальное окно детали заказа */}
-
-          <Modal
-            header={"test"}
-            handleCloseModal={handleCloseModal}
-            isOpen={isOpen}
-          >
-            <div className={stylesApp.modalContaner}>
-              <p className="text text_type_digits-large pt-30">034536</p>
-              <p className="text text text_type_main-default mb-8">
-                идентификатор заказа
-              </p>
-              <img src={imageDone} />
-              <p className="text text text_type_main-default mt-15">
-                Ваш заказ начали готовить
-              </p>
-
-              <p className="text text text_type_main-default mt-2 pb-30">
-                Дождитесь готовности на орбитальной станции
-              </p>
-            </div>
-          </Modal>
         </>
       )}
-      {/* 
+    </>
+  );
+}
+
+export default App;
+
+// backup
+
+{
+  /* 
       {isModalOpen && (
         <Modal header={"test"} handleCloseModal={handleCloseModal}>
           <div className={stylesApp.modalContaner}>
@@ -141,64 +126,5 @@ function App() {
             </p>
           </div>
         </Modal>
-      )} */}
-
-      {/*       <Modal header={"test"}>
-        <div className={stylesApp.modalContaner}>
-          <p className="text text_type_digits-large pt-30">034536</p>
-          <p className="text text text_type_main-default mb-8">
-            идентификатор заказа
-          </p>
-          <img src={imageDone} />
-          <p className="text text text_type_main-default mt-15">
-            Ваш заказ начали готовить
-          </p>
-
-          <p className="text text text_type_main-default mt-2 pb-30">
-            Дождитесь готовности на орбитальной станции
-          </p>
-        </div>
-      </Modal> */}
-
-      {/* <Modal header={"Детали ингредиента"}>
-        <div className={stylesApp.modalContaner}>
-          <img src={element.image_large} alt={element.name} className=""></img>
-          <p className="text text text_type_main-default mb-4">
-            {element.name}
-          </p>
-          <div
-            className={stylesApp.modalIngredientsDetailsWrapper + " mt-8 mb-15"}
-          >
-            <div className={stylesApp.mIProductDesriptionWrapper + " mr-5"}>
-              <p className="text text text_type_main-default">Калории,ккал</p>
-              <p className="text text text_type_main-default">
-                {element.calories}
-              </p>
-            </div>
-
-            <div className={stylesApp.mIProductDesriptionWrapper + " mr-5"}>
-              <p className="text text text_type_main-default">Белки, г</p>
-              <p className="text text text_type_main-default">
-                {element.proteins}
-              </p>
-            </div>
-
-            <div className={stylesApp.mIProductDesriptionWrapper + " mr-5"}>
-              <p className="text text text_type_main-default">Жиры, г</p>
-              <p className="text text text_type_main-default">{element.fat}</p>
-            </div>
-
-            <div className={stylesApp.mIProductDesriptionWrapper}>
-              <p className="text text text_type_main-default">Углеводы, г</p>
-              <p className="text text text_type_main-default">
-                {element.carbohydrates}
-              </p>
-            </div>
-          </div>
-        </div>
-      </Modal> */}
-    </>
-  );
+      )} */
 }
-
-export default App;

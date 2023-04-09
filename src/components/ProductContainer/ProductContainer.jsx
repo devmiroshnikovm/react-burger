@@ -1,14 +1,64 @@
-import ElementItem from "../ElementItem/ElementItem";
-import styles from "./styles.modules.css";
+import styles from "./styles.module.css";
+import BurgerIngredient from "../BurgerIngredient/BurgerIngredient";
 
 function ProductContainer(props) {
-  const { elements, ...otherProps } = props;
+  const { elements, handleOnSelect, isOpen, ...otherProps } = props;
 
   return (
-    <div>
-      <ElementItem elements={elements} />
-    </div>
+    <>
+      <div className={`${styles.scrollContainer} custom-scroll`}>
+        <p className="text text_type_main-medium">Булки</p>
+        <ul className={styles.container}>
+          {elements.map((element) => {
+            if (element.type === "bun") {
+              return (
+                <BurgerIngredient
+                  ingredient={element}
+                  key={element._id}
+                  handleOnSelect={handleOnSelect}
+                  isOpen={isOpen}
+                />
+              );
+            }
+          })}
+        </ul>
+        <p className="text text_type_main-medium">Соусы</p>
+        <ul className={styles.container}>
+          {elements.map((element) => {
+            if (element.type === "sauce") {
+              return (
+                <BurgerIngredient
+                  ingredient={element}
+                  key={element._id}
+                  handleOnSelect={handleOnSelect}
+                  isOpen={isOpen}
+                />
+              );
+            }
+          })}
+        </ul>
+        <p className="text text_type_main-medium">Начинки</p>
+        <ul className={styles.container}>
+          {elements.map((element) => {
+            if (element.type === "main") {
+              return (
+                <BurgerIngredient
+                  ingredient={element}
+                  key={element._id}
+                  handleOnSelect={handleOnSelect}
+                  isOpen={isOpen}
+                />
+              );
+            }
+          })}
+        </ul>
+      </div>
+    </>
   );
 }
 
 export default ProductContainer;
+
+{
+  /* <ElementItem elements={elements} /> */
+}

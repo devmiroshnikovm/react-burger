@@ -1,3 +1,7 @@
+/* 
+это реализация по v1
+*/
+
 import styles from "./styles.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
