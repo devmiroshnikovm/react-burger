@@ -13,12 +13,13 @@ const modalRoot = document.getElementById("react-modals");
 
 function Modal(props) {
   const {
-    header,
-    handleCloseModal,
-    isOpen,
-    resetCurrentIngredient,
-    resetIsOrderDetailsOpen,
+    header, //header
+    handleCloseModal, // меняет isOpen state в App
+    isOpen, // state в App,  if (!isOpen) return null; - это ниже в коде перед порталом
+    resetCurrentIngredient, // этот props прилетает из BurgerIngredients - тут сбрасываем state currentIngredient в BurgerIngredients
+    resetIsOrderDetailsOpen, // этот props прилетает из Burgerconstractor - тут сбрасываем state isOrderDetailsOpen в Burgerconstractor
   } = props;
+
   const [domReady, setDomReady] = useState(false);
 
   /* закрытие модального окна */
