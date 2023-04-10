@@ -62,6 +62,7 @@ function App() {
         }, 2000);
       } catch (err) {
         setError(err);
+        console.log(error);
       }
     };
 
@@ -72,6 +73,10 @@ function App() {
       // отписка от событий, закрытие соединений
     };
   }, []);
+
+  if (error) {
+    return <ErrorMock error={error.message} />;
+  }
 
   return (
     <>
@@ -104,27 +109,3 @@ function App() {
 }
 
 export default App;
-
-// backup
-
-{
-  /* 
-      {isModalOpen && (
-        <Modal header={"test"} handleCloseModal={handleCloseModal}>
-          <div className={stylesApp.modalContaner}>
-            <p className="text text_type_digits-large pt-30">034536</p>
-            <p className="text text text_type_main-default mb-8">
-              идентификатор заказа
-            </p>
-            <img src={imageDone} />
-            <p className="text text text_type_main-default mt-15">
-              Ваш заказ начали готовить
-            </p>
-
-            <p className="text text text_type_main-default mt-2 pb-30">
-              Дождитесь готовности на орбитальной станции
-            </p>
-          </div>
-        </Modal>
-      )} */
-}

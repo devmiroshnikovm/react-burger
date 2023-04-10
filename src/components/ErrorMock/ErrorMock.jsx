@@ -1,9 +1,9 @@
 import styles from "./styles.module.css";
 function ErrorMock(props) {
-  console.log(props);
+  const { error } = props;
   return (
     <div className={styles.box}>
-      <p className="text text_type_main-large">Error</p>
+      <p className="text text_type_main-large">{error}</p>
     </div>
   );
 }
